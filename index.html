@@ -14,23 +14,14 @@
     body {
       font-family: 'Poppins', sans-serif;
       color: #333;
-      text-align: center;
-      background: linear-gradient(rgba(255, 230, 242, 0.9), rgba(255, 230, 255, 0.9)), 
-                  url('https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=1600&q=80');
-      background-size: cover;
-      background-position: center;
-      min-height: 100vh;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      padding: 20px;
+      scroll-behavior: smooth; /* Smooth scrolling between sections */
     }
 
     nav {
-      position: absolute;
+      position: fixed;
       top: 20px;
       left: 20px;
+      z-index: 100;
     }
 
     nav a {
@@ -42,6 +33,7 @@
       box-shadow: 0 0 10px rgba(255, 192, 203, 0.5);
       transition: all 0.3s ease;
       font-size: 1em;
+      margin-right: 10px;
     }
 
     nav a:hover {
@@ -50,19 +42,39 @@
       box-shadow: 0 0 20px rgba(255, 105, 180, 0.7);
     }
 
-    h1 {
-      color: #ff66a3;
+    section {
+      min-height: 100vh; /* Full viewport height for each section */
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      padding: 10px;
+      margin: 0px;
+    }
+
+    /* Welcome Section */
+    #welcome {
+      background: linear-gradient(rgba(255, 230, 242, 0.9), rgba(255, 230, 255, 0.9)), 
+                  url('https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=1600&q=80');
+      background-size: cover;
+      background-position: center;
+    }
+
+    #welcome h1 {
       font-size: 2.8em;
+      color: #d147a3;
       text-shadow: 0 0 10px rgba(255, 182, 193, 0.8);
       margin-bottom: 10px;
     }
 
-    p {
-      font-size: 1.3em;
-      margin-bottom: 30px;
+    #welcome p {
+      font-size: 1.5em;
+      color: #a03d8f;
+      margin-bottom: 20px;
     }
 
-    .button {
+    #welcome .button {
       background-color: #ff99cc;
       color: white;
       border: none;
@@ -75,25 +87,47 @@
       text-decoration: none;
     }
 
-    .button:hover {
+    #welcome .button:hover {
       background-color: #ff66a3;
       box-shadow: 0 0 20px rgba(255, 105, 180, 0.8);
       transform: scale(1.05);
     }
 
-    /* 🌸 Gallery Section */
-    .gallery-container {
-      width: 90%;
-      max-width: 800px;
-      overflow: hidden;
-      border-radius: 20px;
-      margin-top: 50px;
-      box-shadow: 0 0 20px rgba(255, 192, 203, 0.5);
-    }
+    /* Gallery Section */
+#gallery {
+  background-color: #fff0f5;
+  padding-left: 10px;   /* 10px from left */
+  padding-right: 10px;  /* 10px from right */
+  padding-top: 20px;
+  display: block;       /* remove flex centering */
+  min-height: auto;     /* remove full viewport height */
+}
+
+.gallery-wrapper {
+  position: relative;
+  width: 100%;
+  max-width: none;
+  height: 600px; 
+  margin: 0 auto;       /* no extra top margin */
+  top: 0;            /* ensures it sits at top inside section */
+}
+
+
+ .gallery-container {
+  margin: 0; /* Remove all margins so it aligns with body padding */
+  width: 100%;
+  max-width: 350px;
+  height: 500px;
+  overflow: hidden;
+  border-radius: 20px;
+  box-shadow: 0 0 20px rgba(255, 192, 203, 0.5);
+}
+
+
 
     .gallery {
       display: flex;
-      width: 400%;
+      width:400%;
       animation: slide 20s infinite;
     }
 
@@ -115,40 +149,127 @@
       100% { transform: translateX(0); }
     }
 
-    /* 🌸 Mobile Responsive */
+    /* Mobile Responsive */
     @media (max-width: 768px) {
-      h1 { font-size: 2em; }
-      p { font-size: 1.1em; }
-      .button { padding: 12px 25px; font-size: 1em; }
-      nav a { font-size: 0.9em; padding: 8px 16px; }
-      .gallery-container { margin-top: 30px; }
+      #welcome h1 { font-size: 2.2em; }
+      #welcome p { font-size: 1.2em; }
+      #welcome .button { padding: 12px 25px; font-size: 1em; }
+      .gallery-container { width: 90%; height: 250px; }
     }
 
     @media (max-width: 480px) {
-      h1 { font-size: 1.8em; }
-      p { font-size: 1em; }
-      .button { width: 80%; max-width: 250px; }
+      #welcome h1 { font-size: 1.8em; }
+      #welcome p { font-size: 1em; }
+      #welcome .button { width: 80%; max-width: 250px; }
+      .gallery-container { height: 200px; }
     }
+
+.gallery-column {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 60%;
+  max-width: 700px;
+  margin-top: 0px;
+}
+.blog-column {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  width: 35%;
+  max-width: 400px;
+  background-color: #ffe4f0;
+  padding: 20px;
+  border-radius: 20px;
+  box-shadow: 0 0 15px rgba(255, 192, 203, 0.5);
+}
+
+.blog-column h2 {
+  color: #d147a3;
+  margin-bottom: 15px;
+  text-align: center;
+}
+
+.blog-post {
+  background-color: #fff0f5;
+  margin-bottom: 15px;
+  padding: 10px;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(255, 182, 193, 0.3);
+}
+
+.blog-post h3 {
+  font-size: 1.1em;
+  margin-bottom: 5px;
+  color: #a03d8f;
+}
+
+.blog-post p {
+  font-size: 0.95em;
+  color: #6b2c5b;
+}
+
+/* Mobile Responsive */
+@media (max-width: 768px) {
+  .gallery-wrapper {
+    position: static;
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+  }
+
+  .gallery-column, .blog-column {
+    position: static;
+    width: 100%;
+    max-width: 100%;
+  }
+}
   </style>
 </head>
 <body>
   <nav>
-    <a href="#">Home</a>
-    <a href="#">Books</a>
-    <a href="#">Author</a>
+    <a href="#welcome">Home</a>
+    <a href="#gallery">Gallery</a>
   </nav>
 
-  <h1>Welcome to Chumi’s Story Garden 💕</h1>
-  <p>Where every chapter blooms with love and wonder 🌸</p>
-  <a href="#" class="button">Read Now 🎀</a>
+  <section id="welcome">
+    <h1>Welcome to Chumi’s Story Garden 💕</h1>
+    <p>Where every chapter blooms with love and wonder 🌸</p>
+    <a href="#" class="button">Read Now 🎀</a>
+  </section>
+<section id="gallery">
+  <div class="gallery-wrapper">
+    <!-- Left Top: Gallery -->
+    <div class="gallery-column">
+      <div class="gallery-container">
+        <div class="gallery">
+          <img src="https://github.com/littlewifevai-ops/chumiwrites/blob/main/Estelle.jpeg?raw=true">
+          <img src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?auto=format&fit=crop&w=1600&q=80" alt="Story image 2">
+          <img src="https://images.unsplash.com/photo-1503264116251-35a269479413?auto=format&fit=crop&w=1600&q=80" alt="Story image 3">
+          <img src="https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=1600&q=80" alt="Story image 4">
+        </div>
+      </div>
+    </div>
 
-  <div class="gallery-container">
-    <div class="gallery">
-      <img src="https://images.unsplash.com/photo-1519681393784-d120267933ba?auto=format&fit=crop&w=1600&q=80" alt="Story image 1">
-      <img src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?auto=format&fit=crop&w=1600&q=80" alt="Story image 2">
-      <img src="https://images.unsplash.com/photo-1503264116251-35a269479413?auto=format&fit=crop&w=1600&q=80" alt="Story image 3">
-      <img src="https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=1600&q=80" alt="Story image 4">
+    <!-- Right Bottom: Latest Blogs -->
+    <div class="blog-column">
+      <h2>Latest Blogs 🌸</h2>
+      <div class="blog-post">
+        <h3>Chapter 10: Blossoming Hearts</h3>
+        <p>A sneak peek into the latest story adventure...</p>
+      </div>
+      <div class="blog-post">
+        <h3>Chapter 9: Whispers of Magic</h3>
+        <p>Discover secrets hidden in the enchanted garden...</p>
+      </div>
+      <div class="blog-post">
+        <h3>Chapter 8: Petals in the Wind</h3>
+        <p>Follow the journey of our hero through enchanted lands...</p>
+      </div>
     </div>
   </div>
+</section>
+
+
 </body>
 </html>
